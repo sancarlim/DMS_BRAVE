@@ -1,0 +1,66 @@
+[System]
+Name='DIP_mamdani'
+Type='mamdani'
+Version=2.0
+NumInputs=4
+NumOutputs=1
+NumRules=13
+AndMethod='min'
+OrMethod='max'
+ImpMethod='min'
+AggMethod='max'
+DefuzzMethod='centroid'
+
+[Input1]
+Name='PERCLOS'
+Range=[0 0.5]
+NumMFs=3
+MF1='SMALL':'gaussmf',[0.05 0.0467]
+MF2='medium':'gaussmf',[0.04 0.163181632653061]
+MF3='large':'gauss2mf',[0.0305 0.241285714285714 0.0954 0.337285714285714]
+
+[Input2]
+Name='Eye_aperture'
+Range=[0 2]
+NumMFs=3
+MF1='small':'gaussmf',[0.2 0]
+MF2='medium':'gaussmf',[0.2 0.571677551020408]
+MF3='large':'gauss2mf',[0.2 1.05816326530612 0.0557 1.79016326530612]
+
+[Input3]
+Name='Blink_rate'
+Range=[0 0.7]
+NumMFs=3
+MF1='small':'gaussmf',[0.08883 -0.004585]
+MF2='medium':'gaussmf',[0.0587245359056288 0.243]
+MF3='large':'gaussmf',[0.1 0.497142857142857]
+
+[Input4]
+Name='Yawning'
+Range=[0 1]
+NumMFs=2
+MF1='small':'gaussmf',[0.16 0.2]
+MF2='large':'gaussmf',[0.16 0.54269387755102]
+
+[Output1]
+Name='DIP'
+Range=[0 1]
+NumMFs=3
+MF1='small':'trimf',[-0.441489795918367 0.0755102040816327 0.305510204081633]
+MF2='medium':'trimf',[0.0759026530612245 0.374932653061224 0.670932653061225]
+MF3='large':'trimf',[0.454728571428571 0.871428571428571 1.28842857142857]
+
+[Rules]
+1 3 1 1, 1 (1) : 1
+1 3 3 2, 3 (1) : 1
+1 3 3 1, 2 (1) : 1
+1 3 1 2, 2 (1) : 1
+1 3 2 2, 2 (1) : 1
+1 3 2 1, 1 (1) : 1
+3 1 0 2, 3 (1) : 2
+2 1 0 0, 3 (1) : 1
+2 2 1 0, 2 (1) : 1
+2 2 3 0, 3 (1) : 1
+2 1 3 0, 2 (1) : 1
+2 2 2 0, 2 (1) : 1
+1 2 1 1, 1 (1) : 1
